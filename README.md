@@ -66,12 +66,4 @@ The rest (form, calendar, search button, results page) works fine. I didn't try 
 
 In a real project I would ask for the test machines to be whitelisted on a test environment, or mock these apis with `page.route()`.
 
-## Things I noticed
 
-- The error "Add arrival airport or city" has the id `location_input_to_0_error` twice on the page (duplicate id, bad for screen readers).
-- On the home page, Explore with no destination doesn't show an error, it goes to "fly anywhere". Probably intended, but worth confirming.
-- Right after the page loads some clicks are ignored (page scripts not ready yet), so a few actions in the page object check that the click worked and retry.
-
-## Last run
-
-8 passed, 1 skipped (autocomplete, blocked with 403), about 40 seconds.

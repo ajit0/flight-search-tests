@@ -9,7 +9,11 @@ module.exports = defineConfig({
   // live public site - run one test at a time so we don't trigger the bot check
   workers: 1,
   retries: 1,
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: [
+    ['list'],
+    ['html', { open: 'never' }],
+    ['allure-playwright', { resultsDir: 'allure-results' }],
+  ],
 
   use: {
     ...devices['Desktop Chrome'],

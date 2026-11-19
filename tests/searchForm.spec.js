@@ -44,6 +44,16 @@ test.describe('Search form', () => {
     expect(page.url()).toBe(urlBefore);
   });
 
+  test('error when origin and destination are the same', async ({ page }) => {
+    await searchPage.openWithRoute(routes.sameAirport, daysFromToday(7));
+    const urlBefore = page.url();
+
+    await searchPage.clickSearch();
+
+    await expect(page.getByText(messages.sameAirports)).toBeVisible();
+    expect(page.url()).toBe(urlBefore);
+  });
+
   test('date picked on home page is shown in the date field', async () => {
     const date = daysFromToday(10);
 

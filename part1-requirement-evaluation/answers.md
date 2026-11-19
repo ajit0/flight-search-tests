@@ -2,7 +2,7 @@
 
 Requirement: "The website users should be able to get the flights of a given flight route by a given date."
 
-The test cases are in test-cases.csv (same as the "Test cases" tab in the Google Sheet).
+The test cases are in test-cases.csv in this folder.
 
 
 ## a) Questions I would ask

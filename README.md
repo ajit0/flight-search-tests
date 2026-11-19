@@ -28,7 +28,7 @@ npx playwright test --ui                         # ui mode
 npm run report                                   # html report of the last run
 ```
 
-Allure report (results are written to `allure-results/` on every run):
+Allure report (`allure-results/` is cleared at the start of every run):
 
 ```
 npm run allure:generate    # builds allure-report/ from the last run

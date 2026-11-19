@@ -3,6 +3,7 @@ const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
+  globalSetup: './global-setup.js',
   timeout: 90_000,
   expect: { timeout: 15_000 },
 

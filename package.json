@@ -6,7 +6,7 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "report": "playwright show-report",
-    "allure:generate": "allure generate allure-results -o allure-report",
+    "allure:generate": "allure generate allure-results -o allure-report --clean",
     "allure:open": "allure open allure-report"
   },
   "devDependencies": {

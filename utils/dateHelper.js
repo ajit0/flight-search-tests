@@ -20,4 +20,9 @@ function toDisplayDate(date) {
   return `${weekday} ${date.getDate()} ${month}`;
 }
 
-module.exports = { daysFromToday, toIsoDate, toDisplayDate };
+// 19 Nov (date shown on the flight cards)
+function toShortDate(date) {
+  return `${date.getDate()} ${date.toLocaleDateString('en-GB', { month: 'short' })}`;
+}
+
+module.exports = { daysFromToday, toIsoDate, toDisplayDate, toShortDate };

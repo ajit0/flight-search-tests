@@ -5,6 +5,7 @@ const routes = {
     fromAirport: 'Delhi International Airport',
     toAirport: 'Chhatrapati Shivaji International Airport',
   },
+  sameAirport: { from: 'DEL', to: 'DEL' },
 };
 
 // one test is created for each date
@@ -17,6 +18,7 @@ const travelDates = [
 
 const messages = {
   missingDestination: 'Add arrival airport or city',
+  sameAirports: "Origin and destination can't be the same",
 };
 
 module.exports = { routes, travelDates, messages };

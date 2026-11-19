@@ -65,5 +65,3 @@ The rest (form, calendar, search button, results page) works fine. I didn't try 
 - if the bot check page doesn't go away, the test is skipped. Wait a few minutes before running again.
 
 In a real project I would ask for the test machines to be whitelisted on a test environment, or mock these apis with `page.route()`.
-
-

@@ -35,18 +35,15 @@ npm run allure:generate    # builds allure-report/ from the last run
 npm run allure:open        # opens it in the browser
 ```
 
-The base url is set in `playwright.config.js` (`https://flights.booking.com`), can be changed with the `BASE_URL` env variable.
-The url from the assignment (`https://www.booking.com/flights/index.en-gb.html`) redirects to `flights.booking.com`, so the tests use that host directly.
-Example for another environment: `BASE_URL=https://staging.example.com npm test`
+Base url is `https://flights.booking.com` (the assignment link redirects there). To run against another environment:
+`BASE_URL=https://staging.example.com npm test`
 
 ## Tests
 
-`tests/searchByRouteAndDate.spec.js` - task 2a. Two tests for each date (today, tomorrow, next week, next month,
-dates are in `test-data/searchData.js`):
-- `results page shows DEL to BOM for <date>` - picks the date in the calendar, clicks Search and checks that the results
-  page shows DEL, BOM, one way and the selected date, and that the url has the same values.
-- `flight cards show DEL to BOM departing <date>` - checks the first flight cards show DEL, BOM and the selected date.
-  Booking.com blocks the flights api for automated browsers, so these are skipped (see below).
+`tests/searchByRouteAndDate.spec.js` - task 2a. Two tests for each date (today, tomorrow, next week, next month):
+- results page - picks the date in the calendar, clicks Search, checks DEL, BOM, one way and the date on the
+  results page and in the url
+- flight cards - checks the first cards show DEL, BOM and the date. Skipped for now, see below.
 
 `tests/searchForm.spec.js` - extra tests:
 - swap button switches from and to
@@ -65,21 +62,19 @@ utils/        date helpers
 
 ## Booking.com blocks some calls
 
-While writing the tests I found Booking.com blocks some of its apis for automated browsers:
+Booking.com blocks some of its apis for automated browsers:
 
-- airport autocomplete (`/api/autocomplete/`) returns 403 "Request blocked"
-- flights list (`/api/flights/`) returns 403
-- after many runs in a short time it shows a bot check page first (`chal_t=` in the url)
+- airport autocomplete (`/api/autocomplete/`) - 403 "Request blocked"
+- flights list (`/api/flights/`) - 403
+- after many runs in a short time - bot check page (`chal_t=` in the url)
 
-The rest (form, calendar, search button, results page) works fine. I didn't try to get around the blocking. Instead:
-- the route is opened with the search url (same link the site builds after a search). Date selection and search are done in the ui.
-- the flight cards tests run only when the flights api returns 200. Otherwise they are marked skipped with the
-  reason ("flights api returned 403 ...") so the report doesn't show a pass for something that wasn't checked.
-- the autocomplete test is skipped with a reason when the api returns 403.
-- if the bot check page doesn't go away, the test is skipped. Wait a few minutes before running again.
+Form, calendar, search button and results page work fine. I didn't try to get around the blocking:
+- the route is opened with the search url (same link the site builds). Date and Search are done in the ui.
+- flight cards tests and the autocomplete test are skipped with the reason when the api gives 403,
+  so the report doesn't show a pass for something that wasn't checked
+- if the bot check page doesn't go away, the test is skipped. Wait a few minutes and run again.
 
-Last run: 9 passed, 5 skipped (4 flight cards tests + autocomplete, all because of 403).
+Last run: 9 passed, 5 skipped (all 5 because of 403).
 
-I didn't mock the flights api with `page.route()` because I never got a real 200 response to copy its format from,
-and a made-up response would only test my own mock. In a real project I would ask for the test machines to be
-whitelisted on a test environment, or save a real response and mock with it.
+I didn't mock the flights api with `page.route()` because I never got a real response to copy the format from.
+In a real project I'd ask for the test machines to be whitelisted on a test environment, or mock with a saved real response.

@@ -47,8 +47,7 @@ test.describe('Search DEL to BOM by date', () => {
       await searchPage.clickSearch();
       const apiStatus = await flightsApi;
 
-      // booking.com blocks the flights api for automated browsers (403).
-      // Without flights there is nothing to check, so mark it skipped instead of passed.
+      // flights api gives 403 for automated browsers - no cards to check, so skip instead of pass
       test.skip(apiStatus !== 200, `flights api returned ${apiStatus} (blocked by Booking.com), cards not checked`);
 
       await expect(resultsPage.flightCards.first()).toBeVisible();

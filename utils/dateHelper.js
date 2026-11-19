@@ -13,16 +13,16 @@ function toIsoDate(date) {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
+// 19 Nov (date shown on the flight cards)
+function toShortDate(date) {
+  const month = date.toLocaleDateString('en-GB', { month: 'short' });
+  return `${date.getDate()} ${month}`;
+}
+
 // Thu 19 Nov (format shown in the travel date field)
 function toDisplayDate(date) {
   const weekday = date.toLocaleDateString('en-GB', { weekday: 'short' });
-  const month = date.toLocaleDateString('en-GB', { month: 'short' });
-  return `${weekday} ${date.getDate()} ${month}`;
-}
-
-// 19 Nov (date shown on the flight cards)
-function toShortDate(date) {
-  return `${date.getDate()} ${date.toLocaleDateString('en-GB', { month: 'short' })}`;
+  return `${weekday} ${toShortDate(date)}`;
 }
 
 module.exports = { daysFromToday, toIsoDate, toDisplayDate, toShortDate };

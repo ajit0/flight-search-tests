@@ -9,7 +9,7 @@ automated with Playwright and JavaScript, using page objects.
 
 ## Setup and run
 
-Node 18 or newer.
+Node 20 or newer.
 
 ```
 npm install
